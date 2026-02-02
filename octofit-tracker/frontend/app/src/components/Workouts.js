@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+
+import Card from 'react-bootstrap/Card';
+import Table from 'react-bootstrap/Table';
 
 const Workouts = () => {
   const [workouts, setWorkouts] = useState([]);
@@ -17,14 +19,29 @@ const Workouts = () => {
   }, [apiUrl]);
 
   return (
-    <div>
-      <h2>Workouts</h2>
-      <ul>
-        {workouts.map((workout, idx) => (
-          <li key={idx}>{workout.name} - {workout.description}</li>
-        ))}
-      </ul>
-    </div>
+    <Card className="mb-4 shadow-sm">
+      <Card.Body>
+        <Card.Title as="h2" className="mb-4">Workouts</Card.Title>
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {workouts.map((workout, idx) => (
+              <tr key={idx}>
+                <td>{idx + 1}</td>
+                <td>{workout.name}</td>
+                <td>{workout.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
   );
 };
 

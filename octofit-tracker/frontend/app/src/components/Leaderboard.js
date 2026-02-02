@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react';
+
+import Card from 'react-bootstrap/Card';
+import Table from 'react-bootstrap/Table';
 
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
@@ -17,14 +19,29 @@ const Leaderboard = () => {
   }, [apiUrl]);
 
   return (
-    <div>
-      <h2>Leaderboard</h2>
-      <ul>
-        {leaderboard.map((entry, idx) => (
-          <li key={idx}>{entry.user} - {entry.score}</li>
-        ))}
-      </ul>
-    </div>
+    <Card className="mb-4 shadow-sm">
+      <Card.Body>
+        <Card.Title as="h2" className="mb-4">Leaderboard</Card.Title>
+        <Table striped bordered hover responsive>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>User</th>
+              <th>Score</th>
+            </tr>
+          </thead>
+          <tbody>
+            {leaderboard.map((entry, idx) => (
+              <tr key={idx}>
+                <td>{idx + 1}</td>
+                <td>{entry.user}</td>
+                <td>{entry.score}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      </Card.Body>
+    </Card>
   );
 };
 
